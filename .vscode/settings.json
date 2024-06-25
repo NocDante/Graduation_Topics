@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Dementia_Experience.sln"
+    "dotnet.defaultSolution": "Graduation_Topics.sln"
 }
