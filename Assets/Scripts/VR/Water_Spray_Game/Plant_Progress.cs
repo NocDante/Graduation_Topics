@@ -8,7 +8,7 @@ public class Plant_Progress : MonoBehaviour
 {
     [SerializeField] private Slider progressBar;
     public GameObject Tutorial;
-    [SerializeField] private SceneTransitionManager Scene_Manager;
+    
     [SerializeField] private Image[] Count_Success_Dots;
     [SerializeField] private RectTransform Fill_Area;
     [SerializeField] private float Cursor_Speed = 1f;
@@ -19,10 +19,12 @@ public class Plant_Progress : MonoBehaviour
     private int Level_index = 0;
     private int Current_Dot_index = 0;
     public bool In_Range {get; private set;} = false;
+
+    public bool GameOver {get; private set;} = false;
     
     void Start()
     {
-        gameObject.SetActive(false);
+        GameOver = false;
         Total_PosX = progressBar.GetComponent<RectTransform>().rect.width; // Initialize the Total_PosX.
         Change_Level(); // Initialize level.
 
@@ -100,12 +102,12 @@ public class Plant_Progress : MonoBehaviour
         if(progressBar.value>=1 || Level_index>=5 || Current_Dot_index>=4){
             Level_index =0;
             Current_Dot_index =0 ;
-            gameObject.SetActive(false);
             this.enabled = false;
 
             // Spray Finish...
+            GameOver = true;
             Debug.Log("Finish!!");
-            Scene_Manager.Go_To_Scene_Async(0);
+            
         }
     }
 
