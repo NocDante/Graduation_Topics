@@ -6,72 +6,48 @@ using UnityEngine.UI;
 
 public class Poke_GameManager : MonoBehaviour
 {
-    
-    [SerializeField] private Touch_Card[] cards;  
-    [SerializeField] private KeyCode[] keyCodes;
-    [SerializeField] private GameObject Progress_Bar;
-    [SerializeField] private RectTransform Fill_Area;
-    private float initialWidth;  
-    private List<Touch_Card> flippedCards = new List<Touch_Card>();
-
-    public float GameTime = 0.0f;
+    [Header("Game Rules")]
+    [SerializeField] private float GameTime = 0.0f;
     private float remainingTime;
-
-    private bool IsFinish = false;
-    private bool TimesUp = false;
+    [SerializeField] private Touch_Card[] cards;
+    private List<Touch_Card> flippedCards = new List<Touch_Card>();
     private bool isChecking = false;
-    public bool Test_Mode = false;
+
+    [Header("UI Settings")]
+    [SerializeField] private GameObject Progress_Bar;
+    [SerializeField] private GameObject Tutorial;
+    [SerializeField] private GameObject Start_Button;
+    [SerializeField] private RectTransform Fill_Area;
+    private float initialWidth;
+
+    [Header("Test Mode Setting")]
+    [SerializeField] private bool Test_Mode = false;
+    [SerializeField] private KeyCode[] keyCodes;
+
+    private enum Game_Status
+    {
+        WaitForStart,
+        GameStart,
+        GameInProgress,
+        GameEnd,
+    }
+    private Game_Status state = Game_Status.WaitForStart;
+
     void Start()
     {
+        // Initialize
         remainingTime = GameTime;
         initialWidth = Fill_Area.sizeDelta.x;
-        TimesUp = false;
+
+        // Hide UI when start
+        Hide_Game_2_Tutorial();
         Hide_Game_2();
-        
     }
     void Update()
     {
-        // Test Mode
-        for (int i = 0; i < cards.Length; i++)
-        {
-            if (Input.GetKeyDown(keyCodes[i]) && Test_Mode)
-            {
-                RotateCard(cards[i]);
-            }
-        }
-    //==============================================
-       if (remainingTime > 0 && !IsFinish)
-    {
-        remainingTime -= Time.deltaTime;
-        UpdateFillArea();
+        TestMode();
+        GameStatus_Detect();
     }
-
-    // Finish Detect
-    IsFinish = true; // 先假设游戏结束
-    foreach (Touch_Card card in cards)
-    {
-        if (card.gameObject.activeInHierarchy)
-        {
-            IsFinish = false; // 如果有卡片仍然活跃，游戏未结束
-            break;
-        }
-    }
-
-    if (IsFinish || remainingTime <= 0)
-    {
-        
-        Hide_Game_2();
-        Debug.Log("Game Over!");
-
-        // 确保游戏结束状态只被设置一次
-        if (!TimesUp)
-        {
-            TimesUp = true;
-        }
-    }
-
-    }
-
     private void UpdateFillArea()
     {
         float fillAmount = remainingTime / GameTime;
@@ -79,7 +55,6 @@ public class Poke_GameManager : MonoBehaviour
         sizeDelta.x = initialWidth * fillAmount;
         Fill_Area.sizeDelta = sizeDelta;
     }
-
     public void RotateCard(Touch_Card card)
     {
         if (!card.isRotating && !isChecking && !flippedCards.Contains(card))
@@ -95,7 +70,6 @@ public class Poke_GameManager : MonoBehaviour
             }
         }
     }
-
     private IEnumerator CheckMatch()
     {
         isChecking = true;
@@ -122,17 +96,101 @@ public class Poke_GameManager : MonoBehaviour
         flippedCards.Clear();
         isChecking = false;
     }
-    private void Hide_Game_2(){
+    private void Hide_Game_2()
+    {
         Progress_Bar.SetActive(false);
 
-        foreach (Touch_Card card in cards){
+        foreach (Touch_Card card in cards)
+        {
             card.gameObject.SetActive(false);
         }
+
+
     }
-    public void Show_Game_2(){
+    public void Show_Game_2()
+    {
         Progress_Bar.SetActive(true);
-        foreach (Touch_Card card in cards){
+        foreach (Touch_Card card in cards)
+        {
             card.gameObject.SetActive(true);
         }
+
+    }
+    public void Show_Game_2_Tutorial()
+    {
+        Tutorial.SetActive(true);
+        Start_Button.SetActive(true);
+
+    }
+    public void Hide_Game_2_Tutorial()
+    {
+        Tutorial.SetActive(false);
+        Start_Button.SetActive(false);
+
+
+    }
+    public void ChangeGameStatus(int nextStatusIndex)
+    {
+        state = (Game_Status)(nextStatusIndex - 1);
+    }
+    private void TestMode()
+    {
+        // Test mode settings.
+        for (int i = 0; i < cards.Length; i++)
+        {
+            if (Input.GetKeyDown(keyCodes[i]) && Test_Mode)
+            {
+                RotateCard(cards[i]);
+            }
+        }
+
+        Debug.Log(state);
+    }
+    private void GameStatus_Detect()
+    {
+        switch (state)
+        {
+            case Game_Status.GameStart:
+                //=============================================== Change the state.
+                if (AreAllCardsInState(true))
+                {
+                    state = Game_Status.GameInProgress;
+                }
+                break;
+
+            case Game_Status.GameInProgress:
+                // ============================================== Start counting times.
+                if (remainingTime > 0)
+                {
+                    remainingTime -= Time.deltaTime;
+                    UpdateFillArea();
+                }
+
+                //=============================================== If matches all the cards, game end. 
+                if (AreAllCardsInState(false) || remainingTime <= 0)
+                {
+                    state = Game_Status.GameEnd;
+                }
+                break;
+
+            case Game_Status.GameEnd:
+
+                Hide_Game_2();
+                Hide_Game_2_Tutorial();
+                // after the game2 end............
+                break;
+
+        }
+    }
+    private bool AreAllCardsInState(bool checkForActive) //Detect if all the cards are active or inactive.
+    {
+        foreach (Touch_Card card in cards)
+        {
+            if (card.gameObject.activeInHierarchy != checkForActive)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
