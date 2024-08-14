@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-public class Day1_GameManager : MonoBehaviour
+public class SprayGameManager : MonoBehaviour
 {
     private NarrationManager narrationManager;
     [SerializeField] private Fade_Screen fadeScreen;
@@ -17,23 +17,23 @@ public class Day1_GameManager : MonoBehaviour
     private int currentWaypointIndex = 0;
     private bool StartMoving = false;
     [SerializeField] float RotationDuration;
-    
-    
+
+
     void Start()
     {
         Hide_SprayBottle_UI();
         fadeScreen.FadeIn();
         narrationManager = GetComponent<NarrationManager>();
         player_agent.updateRotation = false;
-        if(plant_Progress != null)
+        if (plant_Progress != null)
             plant_Progress.OnGameOver += HandleOnGameOver;
-        
-        
-        
+
+
+
     }
     void Update()
     {
-        
+
 
         //=======================
 
@@ -43,20 +43,22 @@ public class Day1_GameManager : MonoBehaviour
         }
         //=======================
     }
-    private void HandleOnGameOver(object sender, EventArgs e){
+    private void HandleOnGameOver(object sender, EventArgs e)
+    {
 
         StartCoroutine(When_The_Game1_End());
         plant_Progress.OnGameOver -= HandleOnGameOver;
     }
-    
-    IEnumerator When_The_Game1_End(){
+
+    IEnumerator When_The_Game1_End()
+    {
         yield return new WaitForSeconds(1f);
         Hide_SprayBottle_UI();
-        
+
         // Start smooth rotation
         Quaternion startRotation = player_agent.gameObject.transform.rotation;
         Quaternion endRotation = startRotation * Quaternion.Euler(0, 180, 0);
-        
+
         float elapsedTime = 0f;
 
         while (elapsedTime < RotationDuration)
@@ -65,20 +67,22 @@ public class Day1_GameManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         // 确保最终角度
         player_agent.gameObject.transform.rotation = endRotation;
 
         StartMoving = true;
-        narrationManager.Narration_After_Game1_End();
+        narrationManager.Narration_After_SprayGame();
     }
 
-    public void Hide_SprayBottle_UI(){
+    public void Hide_SprayBottle_UI()
+    {
         SprayBottle.SetActive(false);
         SprayBottle_UI.SetActive(false);
     }
-     public void Show_SprayBottle_UI(){
-        
+    public void Show_SprayBottle_UI()
+    {
+
         SprayBottle.SetActive(true);
         SprayBottle_UI.SetActive(true);
     }
@@ -100,9 +104,9 @@ public class Day1_GameManager : MonoBehaviour
         }
         else
         {
-            StartMoving = false; 
-            
-            
+            StartMoving = false;
+
+
         }
     }
 }

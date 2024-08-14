@@ -33573,7 +33573,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1888252171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 687848a27a98f3b44977746a14d6f71a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2239eae41ee9c0341b2aac1b95c53d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeScreen: {fileID: 20070206}
@@ -33694,52 +33694,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101f5bf065c3d294aa4958c8c1166313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips_1:
-  - {fileID: 8300000, guid: d7afa8f5e0a10534c942c09f12d75985, type: 3}
-  - {fileID: 8300000, guid: 2a783fdcdeb66564e8f7a1d7f35384ec, type: 3}
-  - {fileID: 8300000, guid: bd1a4310d13430248b7dd205231c7ce0, type: 3}
-  events_1:
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1888252174}
-        m_TargetAssemblyTypeName: Day1_GameManager, Assembly-CSharp
-        m_MethodName: Show_SprayBottle_UI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  audioClips_2:
-  - {fileID: 8300000, guid: 8624424278029d049ade7f89078e5918, type: 3}
-  - {fileID: 8300000, guid: 0162ea70b9ac96542acbe88836da2649, type: 3}
-  - {fileID: 8300000, guid: 4a98233cc76e76b45b2ac9b6a88d6615, type: 3}
-  events_2:
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1888252177}
-        m_TargetAssemblyTypeName: Poke_GameManager, Assembly-CSharp
-        m_MethodName: Show_Game_2_Tutorial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  narrationGroups:
+  - audioClips:
+    - {fileID: 8300000, guid: d7afa8f5e0a10534c942c09f12d75985, type: 3}
+    - {fileID: 8300000, guid: 2a783fdcdeb66564e8f7a1d7f35384ec, type: 3}
+    - {fileID: 8300000, guid: bd1a4310d13430248b7dd205231c7ce0, type: 3}
+    unityEvents:
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1888252174}
+          m_TargetAssemblyTypeName: Day1_GameManager, Assembly-CSharp
+          m_MethodName: Show_SprayBottle_UI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - audioClips:
+    - {fileID: 8300000, guid: 8624424278029d049ade7f89078e5918, type: 3}
+    - {fileID: 8300000, guid: 0162ea70b9ac96542acbe88836da2649, type: 3}
+    - {fileID: 8300000, guid: 4a98233cc76e76b45b2ac9b6a88d6615, type: 3}
+    unityEvents:
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1888252177}
+          m_TargetAssemblyTypeName: Poke_GameManager, Assembly-CSharp
+          m_MethodName: Show_Game_2_Tutorial
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - audioClips:
+    - {fileID: 8300000, guid: 1064de79e21f1c041a48baee9452d580, type: 3}
+    - {fileID: 8300000, guid: 6b12d26d71224db4987c0be90b1ca683, type: 3}
+    - {fileID: 8300000, guid: 12031955dce882847806e6ad89ef2f02, type: 3}
+    - {fileID: 8300000, guid: 353776883980e9c479cbfbc5639713cd, type: 3}
+    unityEvents:
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &1888252177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33749,7 +33766,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1888252171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c90d3e8f06e6849bd94509339c4c02, type: 3}
+  m_Script: {fileID: 11500000, guid: 59277920bb05c6940a546031bb754fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GameTime: 30
@@ -39333,6 +39350,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1888252176}
+        m_TargetAssemblyTypeName: NarrationManager, Assembly-CSharp
+        m_MethodName: Narration_When_MatchGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls: []
@@ -42129,7 +42158,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
