@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Poke_GameManager : MonoBehaviour
+public class MatchGameManager : MonoBehaviour
 {
     [Header("Game Rules")]
     [SerializeField] private float GameTime = 0.0f;
