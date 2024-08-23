@@ -18,6 +18,8 @@ public class MatchGameManager : MonoBehaviour
     [SerializeField] private GameObject Tutorial;
     [SerializeField] private GameObject Start_Button;
     [SerializeField] private RectTransform Fill_Area;
+
+    [SerializeField] private GameObject Vague_Photo;
     private float initialWidth;
 
     [Header("Test Mode Setting")]
@@ -38,6 +40,7 @@ public class MatchGameManager : MonoBehaviour
         // Initialize
         remainingTime = GameTime;
         initialWidth = Fill_Area.sizeDelta.x;
+        Vague_Photo.SetActive(true);
 
         // Hide UI when start
         Hide_Game_2_Tutorial();
@@ -177,6 +180,7 @@ public class MatchGameManager : MonoBehaviour
 
                 Hide_Game_2();
                 Hide_Game_2_Tutorial();
+                Vague_Photo.SetActive(false);
                 // after the game2 end............
                 break;
 
