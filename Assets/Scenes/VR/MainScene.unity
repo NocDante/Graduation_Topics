@@ -36158,6 +36158,7 @@ GameObject:
   - component: {fileID: 1888252176}
   - component: {fileID: 1888252174}
   - component: {fileID: 1888252177}
+  - component: {fileID: 1888252178}
   - component: {fileID: 1888252175}
   m_Layer: 0
   m_Name: GameManager
@@ -36207,16 +36208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2239eae41ee9c0341b2aac1b95c53d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeScreen: {fileID: 20070206}
   SprayBottle: {fileID: 1999929408}
   SprayBottle_UI: {fileID: 7907354929274892855}
-  plant_Progress: {fileID: 2303040019735256600}
-  waypoints:
-  - {fileID: 776368083}
-  - {fileID: 1805519433}
-  - {fileID: 68965185}
-  player_agent: {fileID: 919132147548326094}
-  RotationDuration: 7
+  TestMode: 1
 --- !u!82 &1888252175
 AudioSource:
   m_ObjectHideFlags: 0
@@ -36361,16 +36355,16 @@ MonoBehaviour:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1888252177}
-          m_TargetAssemblyTypeName: Poke_GameManager, Assembly-CSharp
-          m_MethodName: Show_Game_2_Tutorial
-          m_Mode: 1
+          m_TargetAssemblyTypeName: MatchGameManager, Assembly-CSharp
+          m_MethodName: Display_MatchGame_Tutorial
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
   - audioClips:
     - {fileID: 8300000, guid: 1064de79e21f1c041a48baee9452d580, type: 3}
@@ -36417,6 +36411,25 @@ MonoBehaviour:
   Vague_Photo: {fileID: 1439841264}
   Test_Mode: 0
   keyCodes: 0101000002010000030100000401000005010000060100000701000008010000
+--- !u!114 &1888252178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888252171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500f6f74587724a4f843141f1ed94a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeScreen: {fileID: 20070206}
+  player_agent: {fileID: 919132147548326094}
+  PhotoRoute_Waypoints:
+  - {fileID: 776368083}
+  - {fileID: 1805519433}
+  - {fileID: 68965185}
+  RotationDuration: 3
 --- !u!1001 &1903059923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37721,7 +37734,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  TestMode: 0
 --- !u!114 &1999929410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41119,7 +41131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 3244873974193889464}
-  Tutorial: {fileID: 4700080100702555529}
+  Tutorial: {fileID: 5231085141890661662}
   Count_Success_Dots:
   - {fileID: 3046950830253651073}
   - {fileID: 3212330071464150381}
@@ -41127,6 +41139,11 @@ MonoBehaviour:
   - {fileID: 122056054341851052}
   Fill_Area: {fileID: 4577777453206616887}
   Cursor_Speed: 0.5
+  Every_Level:
+  - 80
+  - 60
+  - 40
+  - 30
 --- !u!23 &2320798171230658025
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -42052,9 +42069,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1888252177}
-        m_TargetAssemblyTypeName: Poke_GameManager, Assembly-CSharp
-        m_MethodName: Show_Game_2
-        m_Mode: 1
+        m_TargetAssemblyTypeName: MatchGameManager, Assembly-CSharp
+        m_MethodName: Display_MatchGame_Tutorial
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -42064,27 +42081,27 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1888252177}
-        m_TargetAssemblyTypeName: Poke_GameManager, Assembly-CSharp
-        m_MethodName: Hide_Game_2_Tutorial
-        m_Mode: 1
+        m_TargetAssemblyTypeName: MatchGameManager, Assembly-CSharp
+        m_MethodName: Display_MatchGame_UI
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1888252177}
-        m_TargetAssemblyTypeName: Poke_GameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: MatchGameManager, Assembly-CSharp
         m_MethodName: ChangeGameStatus
-        m_Mode: 3
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MatchGameStart
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1888252176}
