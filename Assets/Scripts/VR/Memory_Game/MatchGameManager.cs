@@ -18,7 +18,6 @@ public class MatchGameManager : MonoBehaviour
     [SerializeField] private GameObject Tutorial;
     [SerializeField] private GameObject Start_Button;
     [SerializeField] private RectTransform Fill_Area;
-
     [SerializeField] private GameObject Vague_Photo;
     private float initialWidth;
 
@@ -26,38 +25,41 @@ public class MatchGameManager : MonoBehaviour
     [SerializeField] private bool Test_Mode = false;
     [SerializeField] private KeyCode[] keyCodes;
 
+    // Game State Settings
     private enum Game_Status
     {
-        WaitForStart,
-        GameStart,
-        GameInProgress,
-        GameEnd,
+        WaitForMatchGameStart,
+        MatchGameStart,
+        MatchGameInProgress,
+        MatchGameEnd,
     }
-    private Game_Status state = Game_Status.WaitForStart;
-
+    private Game_Status state = Game_Status.WaitForMatchGameStart;
+    private Coroutine gameInProgressCoroutine;
+    public EventHandler OnMatchGame_StateChanged;
     void Start()
     {
+        OnMatchGame_StateChanged += Handle_MatchGameStateChanged;
+
         // Initialize
         remainingTime = GameTime;
         initialWidth = Fill_Area.sizeDelta.x;
         Vague_Photo.SetActive(true);
 
         // Hide UI when start
-        Hide_Game_2_Tutorial();
-        Hide_Game_2();
+        Display_MatchGame_Tutorial(false);
+        Display_MatchGame_UI(false);
     }
     void Update()
     {
         TestMode();
+    }
+
+    //Event Settings
+    void Handle_MatchGameStateChanged(object sender, EventArgs e)
+    {
         GameStatus_Detect();
     }
-    private void UpdateFillArea()
-    {
-        float fillAmount = remainingTime / GameTime;
-        Vector2 sizeDelta = Fill_Area.sizeDelta;
-        sizeDelta.x = initialWidth * fillAmount;
-        Fill_Area.sizeDelta = sizeDelta;
-    }
+    #region Cards Functions
     public void RotateCard(Touch_Card card)
     {
         if (!card.isRotating && !isChecking && !flippedCards.Contains(card))
@@ -99,93 +101,6 @@ public class MatchGameManager : MonoBehaviour
         flippedCards.Clear();
         isChecking = false;
     }
-    private void Hide_Game_2()
-    {
-        Progress_Bar.SetActive(false);
-
-        foreach (Touch_Card card in cards)
-        {
-            card.gameObject.SetActive(false);
-        }
-
-
-    }
-    public void Show_Game_2()
-    {
-        Progress_Bar.SetActive(true);
-        foreach (Touch_Card card in cards)
-        {
-            card.gameObject.SetActive(true);
-        }
-
-    }
-    public void Show_Game_2_Tutorial()
-    {
-        Tutorial.SetActive(true);
-        Start_Button.SetActive(true);
-
-    }
-    public void Hide_Game_2_Tutorial()
-    {
-        Tutorial.SetActive(false);
-        Start_Button.SetActive(false);
-
-
-    }
-    public void ChangeGameStatus(int nextStatusIndex)
-    {
-        state = (Game_Status)(nextStatusIndex - 1);
-    }
-    private void TestMode()
-    {
-        // Test mode settings.
-        for (int i = 0; i < cards.Length; i++)
-        {
-            if (Input.GetKeyDown(keyCodes[i]) && Test_Mode)
-            {
-                RotateCard(cards[i]);
-            }
-        }
-
-        Debug.Log(state);
-    }
-    private void GameStatus_Detect()
-    {
-        switch (state)
-        {
-            case Game_Status.GameStart:
-                //=============================================== Change the state.
-                if (AreAllCardsInState(true))
-                {
-                    state = Game_Status.GameInProgress;
-                }
-                break;
-
-            case Game_Status.GameInProgress:
-                // ============================================== Start counting times.
-                if (remainingTime > 0)
-                {
-                    remainingTime -= Time.deltaTime;
-                    UpdateFillArea();
-                }
-
-                //=============================================== If matches all the cards, game end. 
-                if (AreAllCardsInState(false) || remainingTime <= 0)
-                {
-                    state = Game_Status.GameEnd;
-                }
-                break;
-
-            case Game_Status.GameEnd:
-
-                Hide_Game_2();
-                Hide_Game_2_Tutorial();
-                Vague_Photo.SetActive(false);
-                // after the game2 end............
-                break;
-
-        }
-    }
     private bool AreAllCardsInState(bool checkForActive) //Detect if all the cards are active or inactive.
     {
         foreach (Touch_Card card in cards)
@@ -197,4 +112,129 @@ public class MatchGameManager : MonoBehaviour
         }
         return true;
     }
+    #endregion
+
+    #region UI
+    private void UpdateFillArea()
+    {
+        float fillAmount = remainingTime / GameTime;
+        Vector2 sizeDelta = Fill_Area.sizeDelta;
+        sizeDelta.x = initialWidth * fillAmount;
+        Fill_Area.sizeDelta = sizeDelta;
+    }
+    public void Display_MatchGame_UI(bool show)
+    {
+        Progress_Bar.SetActive(show);
+        foreach (Touch_Card card in cards)
+        {
+            card.gameObject.SetActive(show);
+        }
+    }
+    public void Display_MatchGame_Tutorial(bool show)
+    {
+        Tutorial.SetActive(show);
+        Start_Button.SetActive(show);
+
+    }
+    #endregion
+
+    #region Game State
+    public void ChangeGameStatus(string nextStatusIndex)
+    {
+        if (Enum.TryParse(nextStatusIndex, out Game_Status _nextStatusIndex))
+        {
+            state = _nextStatusIndex;
+            OnMatchGame_StateChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+    }
+    private void GameStatus_Detect()
+    {
+        switch (state)
+        {
+            case Game_Status.MatchGameStart:
+                //=============================================== Change the state.
+                Display_MatchGame_Tutorial(false);
+                Display_MatchGame_UI(true);
+
+                if (AreAllCardsInState(true))
+                {
+                    state = Game_Status.MatchGameInProgress;
+                    OnMatchGame_StateChanged?.Invoke(this, EventArgs.Empty);
+
+                }
+                break;
+
+            case Game_Status.MatchGameInProgress:
+                if (gameInProgressCoroutine == null)
+                {
+                    gameInProgressCoroutine = StartCoroutine(GameInProgress_Coroutine());
+                }
+                break;
+
+            case Game_Status.MatchGameEnd:
+                Stop_GameInProgress_Coroutine();
+                Display_MatchGame_UI(false);
+                Display_MatchGame_Tutorial(false);
+                Vague_Photo.SetActive(false);
+                // after the game2 end............
+                break;
+
+        }
+    }
+    private IEnumerator GameInProgress_Coroutine()
+    {
+        // ============================================== Start counting times.
+        while (remainingTime > 0)
+        {
+            remainingTime -= Time.deltaTime;
+            UpdateFillArea();
+
+            //=============================================== If matches all the cards, game end. 
+            if (AreAllCardsInState(false) || remainingTime <= 0.01f)
+            {
+                state = Game_Status.MatchGameEnd;
+                OnMatchGame_StateChanged?.Invoke(this, EventArgs.Empty);
+                yield break;
+            }
+            yield return null;
+        }
+
+    }
+    private void Stop_GameInProgress_Coroutine()
+    {
+        if (gameInProgressCoroutine != null)
+        {
+            StopCoroutine(GameInProgress_Coroutine());
+            gameInProgressCoroutine = null;
+        }
+    }
+    #endregion
+
+    #region TestMode
+    private void TestMode()
+    {
+        if (Test_Mode)
+        {
+            // Test mode settings.
+            for (int i = 0; i < cards.Length; i++)
+            {
+                if (Input.GetKeyDown(keyCodes[i]))
+                {
+                    RotateCard(cards[i]);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+                ChangeGameStatus("MatchGameStart");
+            }
+        }
+
+
+        Debug.Log(state);
+    }
+    #endregion
+
 }

@@ -38,12 +38,12 @@ public class Water_Spray : MonoBehaviour, Oculus.Interaction.HandGrab.IHandGrabU
     private static readonly int STAMP_MATRIX_PROPERTY = Shader.PropertyToID("_StampMatrix");
     private static readonly WaitForSeconds WAIT_TIME = new WaitForSeconds(0.1f);
     private bool _wasFired = false;
-    private bool hitPlant = false;
+    public bool hitPlant { get; private set; } = false;
     private float _dampedUseStrength = 0;
     private float _lastUseTime;
 
     private Vector3 Original_Pos;
-    [Tooltip("Press T")] public bool TestMode;
+
     #region input
     void Start()
     {
@@ -67,23 +67,10 @@ public class Water_Spray : MonoBehaviour, Oculus.Interaction.HandGrab.IHandGrabU
 
         if (transform.position != Original_Pos)
         {
-            plantProgress.Tutorial.SetActive(false);
+            plantProgress.Show_SprayGameTutorial();
         }
 
-        // Test mode
-        if (TestMode)
-        {
-            if (Input.GetKey(KeyCode.T))
-            {
-                hitPlant = true;
-                ComputeUseStrength(1);
-            }
-            else
-            {
-                ComputeUseStrength(0);
-                hitPlant = false;
-            }
-        }
+
     }
 
     private void UpdateTriggerRotation(float progress)
@@ -115,9 +102,11 @@ public class Water_Spray : MonoBehaviour, Oculus.Interaction.HandGrab.IHandGrabU
 
     private IEnumerator StampRoutine(int stampCount, float randomness, float spread, float strength)
     {
-        //這兩段要放這裡
+
+        // If player successes, change level.
         if (hitPlant && plantProgress.In_Range)
         {
+            plantProgress.Change_Success_Dot(plantProgress.Level_index - 1, 1);
             plantProgress.Change_Level();
         }
 
