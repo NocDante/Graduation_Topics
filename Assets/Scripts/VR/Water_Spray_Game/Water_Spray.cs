@@ -67,7 +67,7 @@ public class Water_Spray : MonoBehaviour, Oculus.Interaction.HandGrab.IHandGrabU
 
         if (transform.position != Original_Pos)
         {
-            plantProgress.Show_SprayGameTutorial();
+            plantProgress.Hide_SprayGameTutorial();
         }
 
 
