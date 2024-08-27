@@ -7,116 +7,155 @@ using System;
 
 public class Plant_Progress : MonoBehaviour
 {
+    [Header("UI Objects Setting")]
     [SerializeField] private Slider progressBar;
-    public GameObject Tutorial;
-    
+    [SerializeField] private Image Tutorial;
     [SerializeField] private Image[] Count_Success_Dots;
     [SerializeField] private RectTransform Fill_Area;
+
+    [Header("GameRule Setting")]
     [SerializeField] private float Cursor_Speed = 1f;
-    
+    [SerializeField] private float[] Every_Level;
+
+    // progressBar Value
     private float Total_PosX;
     private float Start_PosX_To_Normal;
     private float End_PosX_To_Normal;
-    private int Level_index = 0;
-    private int Current_Dot_index = 0;
-    public bool In_Range {get; private set;} = false;
 
-    
-    public event EventHandler OnGameOver;
-    
+    // Game State Values
+    public int Level_index { get; private set; } = 0;
+    public bool In_Range { get; private set; } = false;
+
+    // Game State Events       
+    public event EventHandler OnSprayGameOver;
+    public event EventHandler OnEnterRange;
+    public event EventHandler OnExitRange;
+
     void Start()
     {
-        
-        Total_PosX = progressBar.GetComponent<RectTransform>().rect.width; // Initialize the Total_PosX.
-        Change_Level(); // Initialize level.
+        Initialized_ProgressBar();
+        Change_Level();
 
-        for(int i = 0; i < Count_Success_Dots.Length; i++){
-            Change_To_Success_Dot(i,0);  
-        }      
     }
     void Update()
     {
-        Current_Dot_index = Level_index-1;
+        ProgressBar_PingPong();
+    }
+    #region Initialization
+    private void Initialized_ProgressBar()
+    {
+        // Reset the level.
+        Level_index = 0;
 
+        // Get total width of the progress bar
+        Total_PosX = progressBar.GetComponent<RectTransform>().rect.width;
+
+        // OnValueChanged event settings 
+        progressBar.onValueChanged.AddListener(OnProgressBarValueChanged);
+
+        // Success_Dot settings 
+        for (int i = 0; i < Count_Success_Dots.Length; i++)
+        {
+            Change_Success_Dot(i, 0);
+        }
+    }
+    private void OnProgressBarValueChanged(float value)
+    {
+        Detect_Wether_In_Range();
+        Detect_Wether_Spray_IsFinished();
+    }
+    #endregion
+    private void ProgressBar_PingPong()
+    {
         if (progressBar != null)
         {
             progressBar.value = Mathf.PingPong(Time.time * Cursor_Speed, 1f); // Cursor movement
-            Detect_Wether_In_Range();
-            Detect_Wether_Spray_IsFinished(); 
-        }
-        else{
-            Debug.LogError("No progressBar being assigned.");
-        }
-    }
-    private void Detect_Wether_In_Range(){
-        if( progressBar.value >= Start_PosX_To_Normal && progressBar.value <= End_PosX_To_Normal){
-            In_Range = true;
+
         }
         else
         {
-            In_Range = false;
+            Debug.LogError("No progressBar being assigned.");
         }
     }
-    private void Level(float fill_size){
-
-        // Change width scale
-        Vector2 Size_Delta = Fill_Area.sizeDelta;
-        Size_Delta.x = fill_size;
-        Fill_Area.sizeDelta = Size_Delta;
-
-        // Limited position where able to spawn
-        Vector2 AnchoredPosition = Fill_Area.anchoredPosition;
-        AnchoredPosition.x = UnityEngine.Random.Range(0, Max_Spawn_PosX(fill_size));
-        float Start_PosX = AnchoredPosition.x;
-        float End_PosX = Start_PosX + fill_size;
-        Fill_Area.anchoredPosition = AnchoredPosition;
-        Start_PosX_To_Normal = NormalizeValue(Start_PosX, 0f, 160f);
-        End_PosX_To_Normal = NormalizeValue(End_PosX, 0f, 160f);
-    }
-    public void Change_Level(){
-        Level_index += 1;
-        Change_To_Success_Dot(Current_Dot_index,1);
-
-        switch(Level_index){
-            case 1:
-                Level(80);        
-                break;
-            case 2:
-                Level(60);
-                break;
-            case 3:
-                Level(40);
-                break;
-            case 4:
-                Level(30);
-                break;
-        }
-    }
-    private float Max_Spawn_PosX(float size){
-        return Total_PosX - size;
-    }
-    public float NormalizeValue(float value, float min, float max)
+    #region State Detect Function
+    private void Detect_Wether_In_Range()
     {
-        return (value - min) / (max - min);
-    }
-    private void Detect_Wether_Spray_IsFinished(){
+        bool newInRange = progressBar.value >= Start_PosX_To_Normal && progressBar.value <= End_PosX_To_Normal;
+        if (newInRange != In_Range)
+        {
+            In_Range = newInRange;
 
-        if(progressBar.value>=1 || Level_index>=5 || Current_Dot_index>=4){
-            Level_index =0;
-            Current_Dot_index =0 ;
-            this.enabled = false;
-
-            // Spray Finish...
-            OnGameOver?.Invoke(this, EventArgs.Empty);
-            
-            
+            // Weather in range
+            if (In_Range)
+            {
+                OnEnterRange?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                OnExitRange?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
+    private void Detect_Wether_Spray_IsFinished()
+    {
+        if (progressBar.value >= 1 || Level_index > Every_Level.Length)
+        {
+            // When GameOver
+            Level_index = 0;
+            this.enabled = false;
+            OnSprayGameOver?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    #endregion
 
-    public void Change_To_Success_Dot(int dot_index,float alpha){
+    #region Level Function
+    private void Level(float fill_size)
+    {
+        // Fill size settings.
+        Vector2 sizeDelta = Fill_Area.sizeDelta;
+        sizeDelta.x = fill_size;
+        Fill_Area.sizeDelta = sizeDelta;
+
+        // Fill size spawning range setting.
+        float maxSpawnPosX = Total_PosX - fill_size;
+        float startPosX = UnityEngine.Random.Range(0, maxSpawnPosX);
+        Fill_Area.anchoredPosition = new Vector2(startPosX, Fill_Area.anchoredPosition.y);
+
+        //Normalization
+        Start_PosX_To_Normal = startPosX / Total_PosX;
+        End_PosX_To_Normal = (startPosX + fill_size) / Total_PosX;
+    }
+    public void Change_Level()
+    {
+        Level_index++;
+        if (Level_index <= Every_Level.Length)
+        {
+            Level(Every_Level[Level_index - 1]);
+        }
+
+    }
+    #endregion
+
+    #region UI Change Function
+    public void Change_Success_Dot(int dot_index, float alpha)
+    {
         Color color = Count_Success_Dots[dot_index].color;
-        color.a = alpha; 
+        color.a = alpha;
         Count_Success_Dots[dot_index].color = color;
+    }
+    public void Show_SprayGameTutorial()
+    {
+        Tutorial.gameObject.SetActive(true);
+    }
+    public void Hide_SprayGameTutorial()
+    {
+        Tutorial.gameObject.SetActive(false);
+    }
+    #endregion
+    void OnDisable()
+    {
+        //Remove Listener
+        progressBar.onValueChanged.RemoveListener(OnProgressBarValueChanged);
     }
 
 }

@@ -32,8 +32,7 @@ public class NarrationManager : MonoBehaviour
     {
         PlayNarration(1, 1, 1);
     }
-    public void Narration_When_MatchGame
-    ()
+    public void Narration_When_MatchGame()
     {
         PlayNarration(2, 1, 1);
     }
