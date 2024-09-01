@@ -178,6 +178,8 @@ public class MatchGameManager : MonoBehaviour
                 Display_MatchGame_Tutorial(false);
                 Vague_Photo.SetActive(false);
                 // after the game2 end............
+                GetComponent<GameFlowManager>().After_MatchGame();
+                GetComponent<NarrationManager>().StopNarration();
                 break;
 
         }
@@ -229,6 +231,8 @@ public class MatchGameManager : MonoBehaviour
             {
 
                 ChangeGameStatus("MatchGameStart");
+                GetComponent<NarrationManager>().Narration_When_MatchGame();
+
             }
         }
 

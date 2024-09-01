@@ -19,7 +19,8 @@ public class SprayGameManager : MonoBehaviour
 
     void Start()
     {
-        Hide_SprayBottle_UI();
+        Display_SprayBottle_UI(false);
+
         if (SprayBottle_UI != null)
             SprayBottle_UI.GetComponent<Plant_Progress>().OnSprayGameOver += Handle_OnSprayGameOver;
     }
@@ -27,28 +28,23 @@ public class SprayGameManager : MonoBehaviour
     {
         TestModeFunction();
     }
+
     private void Handle_OnSprayGameOver(object sender, EventArgs e)
     {
         GetComponent<GameFlowManager>().After_SprayGame();
         SprayBottle_UI.GetComponent<Plant_Progress>().OnSprayGameOver -= Handle_OnSprayGameOver;
 
     }
-
-
-    public void Hide_SprayBottle_UI()
+    public void Display_SprayBottle_UI(bool visible)
     {
-        SprayBottle.SetActive(false);
-        SprayBottle_UI.SetActive(false);
+        SprayBottle.SetActive(visible);
+        SprayBottle_UI.SetActive(visible);
     }
-    public void Show_SprayBottle_UI()
-    {
 
-        SprayBottle.SetActive(true);
-        SprayBottle_UI.SetActive(true);
-    }
+
+    #region TestMode
     private void TestModeFunction()
     {
-        // Test mode
         if (TestMode)
         {
             if (Input.GetKey(KeyCode.T) && SprayBottle.activeInHierarchy && SprayBottle_UI.activeInHierarchy)
@@ -61,4 +57,5 @@ public class SprayGameManager : MonoBehaviour
             }
         }
     }
+    #endregion
 }
