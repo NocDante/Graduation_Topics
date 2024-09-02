@@ -43,6 +43,10 @@ public class NarrationManager : MonoBehaviour
     {
         PlayNarration(3, 0, 2);
     }
+    public void Narration_FrontDoor()
+    {
+        PlayNarration(4, 0, 0.5f);
+    }
     #endregion
 
     #region  Audio Settings
