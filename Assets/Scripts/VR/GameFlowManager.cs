@@ -81,14 +81,12 @@ public class GameFlowManager : MonoBehaviour
         GetComponent<SprayGameManager>().Display_SprayBottle_UI(false);
         yield return new WaitForSeconds(1f);
 
-
         // Start moving & narration
         OnStart_PhotoRoute?.Invoke(this, EventArgs.Empty);
     }
 
     private void Handle_OnStartPhotoRoute(object sender, EventArgs e)
     {
-
         narro.Narration_After_SprayGame();
         StartMoving(PhotoRoute_Waypoints);
     }
@@ -106,24 +104,23 @@ public class GameFlowManager : MonoBehaviour
     }
     private void Handle_OnStartDoorRoute(object sender, EventArgs e)
     {
-
         narro.Narration_After_MatchGame();
-        StartMoving(DoorRoute_Waypoints);
+        StartMoving(DoorRoute_Waypoints, narro.Narration_FrontDoor);
     }
 
     #endregion
 
     #region Moving & Rotation
 
-    void StartMoving(List<Transform> waypoints)
+    void StartMoving(List<Transform> waypoints, Action onComplete = null)
     {
         if (moveCoroutine != null)
         {
             StopCoroutine(moveCoroutine);
         }
-        moveCoroutine = StartCoroutine(MoveThroughWaypoints(waypoints));
+        moveCoroutine = StartCoroutine(MoveThroughWaypoints(waypoints, onComplete));
     }
-    IEnumerator MoveThroughWaypoints(List<Transform> waypoints)
+    IEnumerator MoveThroughWaypoints(List<Transform> waypoints, Action onComplete = null)
     {
         int index = 0;
         while (index < waypoints.Count)
@@ -149,9 +146,9 @@ public class GameFlowManager : MonoBehaviour
             {
                 yield return null;
             }
-
             index++;
         }
+        onComplete?.Invoke();
     }
 
     IEnumerator SmoothRotatePlayer(Quaternion targetRotation)
