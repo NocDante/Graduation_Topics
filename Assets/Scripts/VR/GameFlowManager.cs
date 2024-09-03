@@ -65,6 +65,11 @@ public class GameFlowManager : MonoBehaviour
     public void DisplayDaughter(bool visible)
     {
         Daughter_OBJ.SetActive(visible);
+
+        if (Daughter_OBJ.activeInHierarchy)
+        {
+            Daughter_OBJ.GetComponentInChildren<Animator>().SetTrigger("Daughter_Move");
+        }
     }
     #endregion
 
