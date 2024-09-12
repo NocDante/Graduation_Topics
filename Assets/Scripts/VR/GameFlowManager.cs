@@ -21,6 +21,7 @@ public class GameFlowManager : MonoBehaviour
     [Header("GameObject Control")]
     [SerializeField] GameObject Neighbor_OBJ;
     [SerializeField] GameObject Daughter_OBJ;
+    [SerializeField] GameObject Door_OBJ;
 
     private Coroutine moveCoroutine;
 
@@ -57,18 +58,34 @@ public class GameFlowManager : MonoBehaviour
         DisplayDaughter(false);
 
     }
-    #region Character Display
+    #region Character Display & Move
     public void DisplayNeighbor(bool visible)
     {
         Neighbor_OBJ.SetActive(visible);
     }
+    public void NeighborMoving()
+    {
+        if (Neighbor_OBJ.activeInHierarchy)
+        {
+            Neighbor_OBJ.GetComponentInChildren<Animator>().SetTrigger("Neighbor_Move");
+        }
+    }
     public void DisplayDaughter(bool visible)
     {
         Daughter_OBJ.SetActive(visible);
-
+    }
+    public void DaughterMoving()
+    {
         if (Daughter_OBJ.activeInHierarchy)
         {
             Daughter_OBJ.GetComponentInChildren<Animator>().SetTrigger("Daughter_Move");
+        }
+    }
+    public void DoorMoving()
+    {
+        if (Door_OBJ.activeInHierarchy)
+        {
+            Door_OBJ.GetComponentInChildren<Animator>().SetTrigger("Door_Open");
         }
     }
     #endregion
