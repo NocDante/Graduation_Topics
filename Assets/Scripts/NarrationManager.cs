@@ -45,7 +45,7 @@ public class NarrationManager : MonoBehaviour
     }
     public void Narration_FrontDoor()
     {
-        PlayNarration(4, 0, 0.5f);
+        PlayNarration(4, 0, 0.8f);
     }
     #endregion
 
