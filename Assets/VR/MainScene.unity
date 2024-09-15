@@ -42420,7 +42420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SprayBottle: {fileID: 1999929408}
   SprayBottle_UI: {fileID: 7907354929274892855}
-  TestMode: 1
+  TestMode: 0
 --- !u!82 &1888252175
 AudioSource:
   m_ObjectHideFlags: 0
@@ -42843,7 +42843,7 @@ MonoBehaviour:
   Start_Button: {fileID: 3096985172649681283}
   Fill_Area: {fileID: 7008671730516412622}
   Vague_Photo: {fileID: 1439841264}
-  Test_Mode: 1
+  Test_Mode: 0
   keyCodes: 0101000002010000030100000401000005010000060100000701000008010000
 --- !u!114 &1888252178
 MonoBehaviour:

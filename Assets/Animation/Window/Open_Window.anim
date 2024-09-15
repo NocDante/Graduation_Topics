@@ -214,7 +214,8 @@ AnimationClip:
   - time: 1.5
     functionName: When_Window_Open
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 363fc6ab3a00b04478d478e800dff70f,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

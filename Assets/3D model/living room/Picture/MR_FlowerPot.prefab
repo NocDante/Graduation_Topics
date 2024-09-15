@@ -412,7 +412,7 @@ MonoBehaviour:
   Scale_X: 0.4
   Scale_Y: 0.4
   Scale_Z: 0.4
-  Rotation_X: 90
+  Rotation_X: 0
   Rotation_Y: 0
   Rotation_Z: 0
 --- !u!1 &4836089936372104374

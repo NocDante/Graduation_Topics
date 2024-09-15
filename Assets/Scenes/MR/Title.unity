@@ -2709,50 +2709,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2085486987}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &321706064
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 321706066}
-  - component: {fileID: 321706065}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &321706065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321706064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a54cee26c519ad647b412430d28bc984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &321706066
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321706064}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &322962815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5932,125 +5888,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101f5bf065c3d294aa4958c8c1166313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips:
-  - {fileID: 8300000, guid: d96845c08028c36488f16ed7fa4f67df, type: 3}
-  - {fileID: 8300000, guid: d57d31544e82fa240b96a0ce49291295, type: 3}
-  - {fileID: 8300000, guid: 13819c2aa32cf854c82340f7be9f9c78, type: 3}
-  - {fileID: 8300000, guid: 68b00b8e78570864da1db1f486890942, type: 3}
-  - {fileID: 8300000, guid: ae1afbcec7883e3478daed5b37886ea2, type: 3}
-  - {fileID: 8300000, guid: e63c3331e3abc894bb9d889685759b16, type: 3}
-  - {fileID: 8300000, guid: 96ed53057279cef40a9b12c6fb1c303b, type: 3}
-  events:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 594225463}
-        m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
-        m_MethodName: BabyPictureSetActive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 594225463}
-        m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
-        m_MethodName: WindowPictureSetActive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 594225463}
-        m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
-        m_MethodName: WindowSetActive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 594225463}
-        m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
-        m_MethodName: PlantSetActive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 594225463}
-        m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
-        m_MethodName: FamilyPictureSetActive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 594225463}
-        m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
-        m_MethodName: Set_Window_Animation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  narrationGroups:
+  - audioClips: []
+    unityEvents: []
+  - audioClips:
+    - {fileID: 8300000, guid: d96845c08028c36488f16ed7fa4f67df, type: 3}
+    - {fileID: 8300000, guid: d57d31544e82fa240b96a0ce49291295, type: 3}
+    - {fileID: 8300000, guid: 13819c2aa32cf854c82340f7be9f9c78, type: 3}
+    - {fileID: 8300000, guid: 68b00b8e78570864da1db1f486890942, type: 3}
+    - {fileID: 8300000, guid: ae1afbcec7883e3478daed5b37886ea2, type: 3}
+    - {fileID: 8300000, guid: e63c3331e3abc894bb9d889685759b16, type: 3}
+    - {fileID: 8300000, guid: 96ed53057279cef40a9b12c6fb1c303b, type: 3}
+    unityEvents:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 594225463}
+          m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
+          m_MethodName: BabyPictureSetActive
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 594225463}
+          m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
+          m_MethodName: WindowSetActive
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 594225463}
+          m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
+          m_MethodName: WindowPictureSetActive
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 594225463}
+          m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
+          m_MethodName: WindowPictureSetActive
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 594225463}
+          m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
+          m_MethodName: FamilyPictureSetActive
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 594225463}
+          m_TargetAssemblyTypeName: MR_NarrationControl, Assembly-CSharp
+          m_MethodName: Set_Window_Animation
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &594225463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14945,7 +14880,7 @@ MonoBehaviour:
   TrackUpdates: 1
   MeshMaterial: {fileID: 2100000, guid: 393d64b573215e544b8b5cc315e10d68, type: 2}
   BorderSize: 0
-  Colliders: 1
+  Colliders: 0
   CutHoles: 0
   castShadows: 1
   hideMesh: 1
@@ -15494,6 +15429,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 143187637}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1536576315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536576316}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536576316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536576315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.7306092, y: -0.32777506, z: -2.021686}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1539245195
 GameObject:
@@ -21283,6 +21249,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnvironmentDepthOcclusion
       objectReference: {fileID: 0}
+    - target: {fileID: 2762874143974431201, guid: 940ca5991157c5b418edaf5e5226df05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3214761230815107649, guid: 940ca5991157c5b418edaf5e5226df05,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21827,6 +21798,6 @@ SceneRoots:
   - {fileID: 1715458411}
   - {fileID: 2065875042}
   - {fileID: 594225461}
-  - {fileID: 60617297}
   - {fileID: 424404002}
-  - {fileID: 321706066}
+  - {fileID: 1536576316}
+  - {fileID: 60617297}

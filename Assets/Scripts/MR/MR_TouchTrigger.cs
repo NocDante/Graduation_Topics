@@ -18,7 +18,7 @@ public class MR_TouchTrigger : MonoBehaviour
 
             if (narrationmanager != null)
             {
-                //narrationmanager.StartNarration();
+                narrationmanager.PlayNarration(1,0,0);
                 Destroy(gameObject);
 
             }

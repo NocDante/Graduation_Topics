@@ -164,7 +164,7 @@ SpriteRenderer:
   m_Size: {x: 48.28, y: 84.52869}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3049729768821312363
@@ -219,9 +219,9 @@ MonoBehaviour:
   Scale_X: 0.6
   Scale_Y: 0.45
   Scale_Z: 0.5
-  Rotation_X: 90
-  Rotation_Y: 0
-  Rotation_Z: 0
+  Rotation_X: 0
+  Rotation_Y: 90
+  Rotation_Z: 90
 --- !u!114 &2850593739922679445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,7 +616,7 @@ SpriteRenderer:
   m_Size: {x: 48.28, y: 84.52869}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5354168150889472154
